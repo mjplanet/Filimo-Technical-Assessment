@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		6176245C295CB8D9004C3197 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6176245B295CB8D9004C3197 /* AppDelegate.swift */; };
 		6176245E295CB8D9004C3197 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6176245D295CB8D9004C3197 /* SceneDelegate.swift */; };
-		61762460295CB8D9004C3197 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6176245F295CB8D9004C3197 /* ViewController.swift */; };
-		61762463295CB8D9004C3197 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61762461295CB8D9004C3197 /* Main.storyboard */; };
 		61762465295CB8DA004C3197 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61762464295CB8DA004C3197 /* Assets.xcassets */; };
 		61762468295CB8DA004C3197 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61762466295CB8DA004C3197 /* LaunchScreen.storyboard */; };
+		617FB88C295CBA7B00CCF71F /* SearchMoviesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FB889295CBA7B00CCF71F /* SearchMoviesModule.swift */; };
+		617FB88D295CBA7B00CCF71F /* SearchMoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FB88A295CBA7B00CCF71F /* SearchMoviesPresenter.swift */; };
+		617FB88E295CBA7B00CCF71F /* SearchMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617FB88B295CBA7B00CCF71F /* SearchMoviesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		61762458295CB8D9004C3197 /* FilimoTechnicalAssessment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilimoTechnicalAssessment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6176245B295CB8D9004C3197 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6176245D295CB8D9004C3197 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6176245F295CB8D9004C3197 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		61762462295CB8D9004C3197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		61762464295CB8DA004C3197 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61762467295CB8DA004C3197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61762469295CB8DA004C3197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		617FB889295CBA7B00CCF71F /* SearchMoviesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesModule.swift; sourceTree = "<group>"; };
+		617FB88A295CBA7B00CCF71F /* SearchMoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesPresenter.swift; sourceTree = "<group>"; };
+		617FB88B295CBA7B00CCF71F /* SearchMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +60,22 @@
 			children = (
 				6176245B295CB8D9004C3197 /* AppDelegate.swift */,
 				6176245D295CB8D9004C3197 /* SceneDelegate.swift */,
-				6176245F295CB8D9004C3197 /* ViewController.swift */,
-				61762461295CB8D9004C3197 /* Main.storyboard */,
+				617FB88F295CBA7E00CCF71F /* SearchMovies */,
 				61762464295CB8DA004C3197 /* Assets.xcassets */,
 				61762466295CB8DA004C3197 /* LaunchScreen.storyboard */,
 				61762469295CB8DA004C3197 /* Info.plist */,
 			);
 			path = FilimoTechnicalAssessment;
+			sourceTree = "<group>";
+		};
+		617FB88F295CBA7E00CCF71F /* SearchMovies */ = {
+			isa = PBXGroup;
+			children = (
+				617FB889295CBA7B00CCF71F /* SearchMoviesModule.swift */,
+				617FB88A295CBA7B00CCF71F /* SearchMoviesPresenter.swift */,
+				617FB88B295CBA7B00CCF71F /* SearchMoviesView.swift */,
+			);
+			path = SearchMovies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +138,6 @@
 			files = (
 				61762468295CB8DA004C3197 /* LaunchScreen.storyboard in Resources */,
 				61762465295CB8DA004C3197 /* Assets.xcassets in Resources */,
-				61762463295CB8D9004C3197 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +148,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61762460295CB8D9004C3197 /* ViewController.swift in Sources */,
+				617FB88C295CBA7B00CCF71F /* SearchMoviesModule.swift in Sources */,
 				6176245C295CB8D9004C3197 /* AppDelegate.swift in Sources */,
+				617FB88E295CBA7B00CCF71F /* SearchMoviesView.swift in Sources */,
 				6176245E295CB8D9004C3197 /* SceneDelegate.swift in Sources */,
+				617FB88D295CBA7B00CCF71F /* SearchMoviesPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		61762461295CB8D9004C3197 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61762462295CB8D9004C3197 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		61762466295CB8DA004C3197 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +296,7 @@
 				INFOPLIST_FILE = FilimoTechnicalAssessment/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +324,7 @@
 				INFOPLIST_FILE = FilimoTechnicalAssessment/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
