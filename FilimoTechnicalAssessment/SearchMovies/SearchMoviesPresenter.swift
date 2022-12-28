@@ -2,7 +2,7 @@
 //  SearchMoviesPresenter.swift
 //  FilimoTechnicalAssessment
 //
-//  Created Mobin Jahantark on 12/28/22.
+//  Created by Mobin Jahantark on 12/28/22.
 //
 
 import Foundation
