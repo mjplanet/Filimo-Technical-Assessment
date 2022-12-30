@@ -29,18 +29,25 @@ public struct HTTPRequest<Model> {
     }
 
     public var urlRequest: URLRequest {
+        var components = URLComponents(string: url.absoluteString)
         let cachePolicy = URLRequest.CachePolicy.returnCacheDataElseLoad
-        var request = URLRequest(url: url, cachePolicy: cachePolicy)
+ 
+        var queryItems: [URLQueryItem] = []
+        parameters?.forEach({ key, value in
+            if let valueString = value as? String {
+                let query = URLQueryItem(name: key, value: valueString)
+                queryItems.append(query)
+            }
+        })
+        
+        components?.queryItems = queryItems
+        
+        var request = URLRequest(url: components!.url!, cachePolicy: cachePolicy)
         request.httpMethod = httpMethod.rawValue
         request.httpBody = body?.serializedData
         if let headers = headers {
             request.allHTTPHeaderFields = headers
         }
-        parameters?.forEach({ key, value in
-            if let valueString = value as? String {
-                request.addValue(valueString, forHTTPHeaderField: key)
-            }
-        })
         return request
     }
 }
