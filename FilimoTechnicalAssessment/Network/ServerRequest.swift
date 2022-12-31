@@ -9,7 +9,7 @@ import Foundation
 
 enum ServerRequest {
     enum SearchMovie {
-        static func searchMovies(apiKey: String, searchQuery: String, page: Int) -> HTTPRequest<[String]> {
+        static func searchMovies(apiKey: String, searchQuery: String, page: Int) -> HTTPRequest {
             let url: URLPath = .baseURL / .search / .movie
             let parameters = ["api_key": apiKey,
                               "query": searchQuery,

@@ -17,6 +17,7 @@ class Networking: NetworkingInterface {
     
     public func request(_ request: URLRequest, responseHandler: @escaping (Result<(data: Data, urlResponse: URLResponse), NetworkingError>) -> Void) {
         let dataTask = session.dataTask(with: request) { data, response, error in
+            debugPrint("Response for \(request.url) --> ", data?.prettyPrintedJSONString ?? "")
             DispatchQueue.main.async {
                 if let error {
                     responseHandler(.failure(.customError(error: error)))
@@ -39,5 +40,15 @@ class Networking: NetworkingInterface {
             }
         }
         dataTask.resume()
+    }
+}
+
+extension Data {    
+    var prettyPrintedJSONString: NSString? {
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let prettyPrintedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else { return nil }
+
+        return prettyPrintedString
     }
 }

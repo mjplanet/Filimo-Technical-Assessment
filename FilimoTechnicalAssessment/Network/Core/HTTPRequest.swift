@@ -10,7 +10,7 @@ import Foundation
 public typealias HTTPParameters = [String: Any]
 public typealias HTTPHeaders = [String: String]
 
-public struct HTTPRequest<Model> {
+public struct HTTPRequest {
     private(set) var httpMethod: HTTPMethod
     private(set) var parameters: HTTPParameters?
     private(set) var body: Codable?
