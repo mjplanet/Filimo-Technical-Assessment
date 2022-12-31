@@ -17,7 +17,7 @@ class Networking: NetworkingInterface {
     
     public func request(_ request: URLRequest, responseHandler: @escaping (Result<(data: Data, urlResponse: URLResponse), NetworkingError>) -> Void) {
         let dataTask = session.dataTask(with: request) { data, response, error in
-            debugPrint("Response for \(request.url) --> ", data?.prettyPrintedJSONString ?? "")
+            debugPrint("Response for \(String(describing: request.url)) --> ", data?.prettyPrintedJSONString ?? "")
             DispatchQueue.main.async {
                 if let error {
                     responseHandler(.failure(.customError(error: error)))

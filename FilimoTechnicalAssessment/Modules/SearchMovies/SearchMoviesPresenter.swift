@@ -52,5 +52,8 @@ extension SearchMoviesPresenter: SearchMoviesPresenterInterface {
     }
     
     func didSelectItemAt(_ indexPath: IndexPath) {
+        let selectedMovie = movies[indexPath.item]
+        let movieDetailModule = MovieDetailModule().build(selectedMovie: selectedMovie)
+        view?.present(movieDetailModule)
     }
 }

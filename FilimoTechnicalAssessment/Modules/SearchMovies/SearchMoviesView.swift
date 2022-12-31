@@ -9,6 +9,7 @@ import UIKit
 
 protocol SearchMoviesViewInterface: AnyObject {
     func movieFetched()
+    func present(_ vc: UIViewController)
 }
 
 class SearchMoviesView: UIViewController {
@@ -116,6 +117,10 @@ extension SearchMoviesView: SearchMoviesViewInterface {
         let movies = presenter.movies
         snapshot.appendItems(movies)
         dataSource?.apply(snapshot)
+    }
+    
+    func present(_ vc: UIViewController) {
+        self.present(vc, animated: true)
     }
 }
 
