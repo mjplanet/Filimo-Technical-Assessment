@@ -37,6 +37,7 @@ class MovieDetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        self.title = .navTitles(.movieDetail)
         applyTheme()
         addSubviews()
         setupConstraints()
@@ -60,9 +61,9 @@ class MovieDetailView: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            stackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 16),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 16),
+            stackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 16),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])

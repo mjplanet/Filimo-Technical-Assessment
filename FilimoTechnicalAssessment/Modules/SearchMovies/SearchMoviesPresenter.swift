@@ -5,7 +5,7 @@
 //  Created by Mobin Jahantark on 12/28/22.
 //
 
-import Foundation
+import UIKit
 
 protocol SearchMoviesPresenterInterface {
     func viewDidLoad()
@@ -54,6 +54,7 @@ extension SearchMoviesPresenter: SearchMoviesPresenterInterface {
     func didSelectItemAt(_ indexPath: IndexPath) {
         let selectedMovie = movies[indexPath.item]
         let movieDetailModule = MovieDetailModule().build(selectedMovie: selectedMovie)
-        view?.present(movieDetailModule)
+        let navigationController = UINavigationController(rootViewController: movieDetailModule)
+        view?.present(navigationController)
     }
 }
