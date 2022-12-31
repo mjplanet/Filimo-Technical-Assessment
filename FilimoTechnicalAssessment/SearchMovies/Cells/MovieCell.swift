@@ -23,8 +23,6 @@ class MovieCell: UICollectionViewCell {
     @IBOutlet weak private var movieReleasedDateLabel: UILabel!
     
     // MARK: - Public variables
-    var movieCoverImageURL: String?
-    
     var movieName: String? {
         didSet {
             movieTitleLabel.text = movieName
@@ -34,6 +32,12 @@ class MovieCell: UICollectionViewCell {
     var releaseDate: String? {
         didSet {
             movieReleasedDateLabel.text = releaseDate
+        }
+    }
+    
+    var movieCoverImageURL: URL? {
+        didSet {
+            movieCoverImageView.loadImage(url: movieCoverImageURL)
         }
     }
 }

@@ -101,6 +101,7 @@ class SearchMoviesView: UIViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
             cell?.movieName = movieItem.title
             cell?.releaseDate = movieItem.releaseDate
+            cell?.movieCoverImageURL = movieItem.thumbnailURL
             return cell
         })
     }
