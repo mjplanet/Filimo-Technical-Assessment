@@ -8,10 +8,10 @@
 import UIKit
 
 struct SearchMoviesModule {
-    func build() -> UIViewController {
-        let presenter = SearchMoviesPresenter()
+    func build(apiClient: APIClient) -> UIViewController {
+        let presenter = SearchMoviesPresenter(apiClient: apiClient)
         let view = SearchMoviesView(presenter: presenter)
-        view.presenter = presenter
+        presenter.view = view
         return view
     }
 }

@@ -8,14 +8,14 @@
 import UIKit
 
 protocol SearchMoviesViewInterface: AnyObject {
-    func updateSnapshot(from movies: [String])
+    func movieFetched()
 }
 
 class SearchMoviesView: UIViewController {
     
     // MARK: - Properties
     var presenter: SearchMoviesPresenterInterface
-    private var dataSource: UICollectionViewDiffableDataSource<Section, String>?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, MovieItemModel>?
     
     private enum Section {
         case main
@@ -49,7 +49,7 @@ class SearchMoviesView: UIViewController {
         presenter.viewDidLoad()
         configureHierarchy()
         configureDataSource()
-        updateSnapshot(from: ["Test"])
+        setupSearchBar()
     }
     
     // MARK: - Setups
@@ -58,10 +58,16 @@ class SearchMoviesView: UIViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.delegate = self
-        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
+        collectionView.register(MovieCell.nib, forCellWithReuseIdentifier: MovieCell.identifier)
         view.addSubview(collectionView)
+        
+        navigationItem.titleView = movieSearchBar
     }
-
+    
+    private func setupSearchBar() {
+        movieSearchBar.delegate = self
+    }
+    
     private func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { [weak self] (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             guard let self = self else { return nil }
@@ -93,10 +99,8 @@ class SearchMoviesView: UIViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, movieItem -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as? MovieCell
-            cell?.movieName = "Test"
-            cell?.releaseDate = "300"
-//            cell?.name = movieItem.
-//            cell?.year = movieItem.year
+            cell?.movieName = movieItem.title
+            cell?.releaseDate = movieItem.releaseDate
             return cell
         })
     }
@@ -105,9 +109,10 @@ class SearchMoviesView: UIViewController {
 }
 
 extension SearchMoviesView: SearchMoviesViewInterface {
-    func updateSnapshot(from movies: [String]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+    func movieFetched() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieItemModel>()
         snapshot.appendSections([.main])
+        let movies = presenter.movies
         snapshot.appendItems(movies)
         dataSource?.apply(snapshot)
     }
@@ -115,5 +120,12 @@ extension SearchMoviesView: SearchMoviesViewInterface {
 
 extension SearchMoviesView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelectItemAt(indexPath)
+    }
+}
+
+extension SearchMoviesView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchMovie(from: searchText)
     }
 }
