@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 protocol SearchMoviesViewInterface: AnyObject {
-    func movieFetched()
+    func movieIsFetching()
+    func movieHasBeenFetched()
+    func resultNotFound()
     func couldNotFetchMedia(withError error: Error)
     func present(_ vc: UIViewController)
 }
@@ -18,7 +21,9 @@ class SearchMoviesView: UIViewController, ToastInterface {
     // MARK: - Properties
     var presenter: SearchMoviesPresenterInterface
     private var dataSource: UICollectionViewDiffableDataSource<Section, MovieItemModel>?
-    
+    @Published private var isLoading = false
+    private var cancellable: [AnyCancellable] = []
+
     private enum Section {
         case main
     }
@@ -33,6 +38,12 @@ class SearchMoviesView: UIViewController, ToastInterface {
         let collectionView = UICollectionView()
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
+    }()
+    
+    private var loadingIndicator : UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.style = .large
+        return view
     }()
     
     // MARK: - Inits
@@ -67,6 +78,7 @@ class SearchMoviesView: UIViewController, ToastInterface {
     
     private func setupSearchBar() {
         movieSearchBar.delegate = self
+        movieSearchBar.placeholder = "Search movie"
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -94,6 +106,17 @@ class SearchMoviesView: UIViewController, ToastInterface {
         section.interGroupSpacing = 8
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
+        // Header
+        var footerSize: NSCollectionLayoutSize?
+        footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+                
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: footerSize!,
+            elementKind: "section-footer-element-kind",
+            alignment: .bottom)
+        
+        section.boundarySupplementaryItems = [sectionFooter]
+        
         return section
     }
     
@@ -105,21 +128,50 @@ class SearchMoviesView: UIViewController, ToastInterface {
             cell?.movieCoverImageURL = movieItem.thumbnailURL
             return cell
         })
+        
+        let footerRegistration = UICollectionView.SupplementaryRegistration
+        <SupplementaryLoadingView>(elementKind: "section-footer-element-kind") { _, _, _ in }
+        
+        dataSource?.supplementaryViewProvider = { _, kind, indexPath in
+            let footer = self.collectionView.dequeueConfiguredReusableSupplementary(using: footerRegistration, for: indexPath)
+            
+            self.$isLoading.sink { isLoading in
+                if isLoading == true {
+                    footer.shouldHide(false)
+                } else {
+                    footer.shouldHide(true)
+                }
+            }.store(in: &self.cancellable)
+
+            return footer
+        }
+
     }
     // MARK: - Actions
     
 }
 
 extension SearchMoviesView: SearchMoviesViewInterface {
-    func movieFetched() {
+    func movieIsFetching() {
+        isLoading = true
+    }
+    
+    func movieHasBeenFetched() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, MovieItemModel>()
         snapshot.appendSections([.main])
         let movies = presenter.getMovies()
         snapshot.appendItems(movies)
         dataSource?.apply(snapshot)
+        
+        isLoading = false
+    }
+    
+    func resultNotFound() {
+        showToast(text: "Result not found")
     }
     
     func couldNotFetchMedia(withError error: Error) {
+        isLoading = false
         if error is NetworkingError {
             showToast(text: error.localizedDescription)
         }
@@ -145,5 +197,9 @@ extension SearchMoviesView: UICollectionViewDelegate {
 extension SearchMoviesView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBarTextDidChange(to: searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("CIR")
     }
 }
