@@ -12,6 +12,7 @@
 		61111710296093B300E9F5BC /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6111170F296093B300E9F5BC /* Texts.swift */; };
 		611117162960948B00E9F5BC /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 611117182960948B00E9F5BC /* Localizable.stringsdict */; };
 		611117222961D19200E9F5BC /* ToastInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611117212961D19200E9F5BC /* ToastInterface.swift */; };
+		6111177D2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6111177C2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.swift */; };
 		611373D529601B9A004E2BFE /* MovieItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611373D429601B9A004E2BFE /* MovieItemModel.swift */; };
 		611373D729601E76004E2BFE /* MovieItemModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611373D629601E76004E2BFE /* MovieItemModelInterface.swift */; };
 		611373DA29601FA3004E2BFE /* PaginationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611373D929601FA3004E2BFE /* PaginationModel.swift */; };
@@ -42,6 +43,16 @@
 		61FF56D3295CE68200EE7E42 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FF56D2295CE68200EE7E42 /* AppConstants.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6111177E2961E15500E9F5BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61762450295CB8D9004C3197 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 61762457295CB8D9004C3197;
+			remoteInfo = FilimoTechnicalAssessment;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		6111170A296088E900E9F5BC /* ViewFactoryMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactoryMethods.swift; sourceTree = "<group>"; };
 		6111170D296093A200E9F5BC /* String+Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localize.swift"; sourceTree = "<group>"; };
@@ -56,6 +67,8 @@
 		6111171F29609AB700E9F5BC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		6111172029609AB800E9F5BC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		611117212961D19200E9F5BC /* ToastInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastInterface.swift; sourceTree = "<group>"; };
+		6111177A2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilimoTechnicalAssessmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6111177C2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilimoTechnicalAssessmentTests.swift; sourceTree = "<group>"; };
 		611373D429601B9A004E2BFE /* MovieItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieItemModel.swift; sourceTree = "<group>"; };
 		611373D629601E76004E2BFE /* MovieItemModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieItemModelInterface.swift; sourceTree = "<group>"; };
 		611373D929601FA3004E2BFE /* PaginationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationModel.swift; sourceTree = "<group>"; };
@@ -87,6 +100,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		611117772961E15500E9F5BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61762455295CB8D9004C3197 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,6 +129,14 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		6111177B2961E15500E9F5BC /* FilimoTechnicalAssessmentTests */ = {
+			isa = PBXGroup;
+			children = (
+				6111177C2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.swift */,
+			);
+			path = FilimoTechnicalAssessmentTests;
+			sourceTree = "<group>";
+		};
 		611373D829601F76004E2BFE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				6176245A295CB8D9004C3197 /* FilimoTechnicalAssessment */,
+				6111177B2961E15500E9F5BC /* FilimoTechnicalAssessmentTests */,
 				61762459295CB8D9004C3197 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				61762458295CB8D9004C3197 /* FilimoTechnicalAssessment.app */,
+				6111177A2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,11 +172,11 @@
 				6176245D295CB8D9004C3197 /* SceneDelegate.swift */,
 				61FF56D2295CE68200EE7E42 /* AppConstants.swift */,
 				6111170A296088E900E9F5BC /* ViewFactoryMethods.swift */,
+				619CFF79296048FF003B8C6B /* Modules */,
 				6111171A2960963300E9F5BC /* Localization */,
 				619CFF8129604D23003B8C6B /* Extensions */,
 				611373D829601F76004E2BFE /* Model */,
 				61FF56C3295CE00900EE7E42 /* Network */,
-				619CFF79296048FF003B8C6B /* Modules */,
 				61762464295CB8DA004C3197 /* Assets.xcassets */,
 				61762466295CB8DA004C3197 /* LaunchScreen.storyboard */,
 				61762469295CB8DA004C3197 /* Info.plist */,
@@ -229,6 +259,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		611117792961E15500E9F5BC /* FilimoTechnicalAssessmentTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 611117822961E15500E9F5BC /* Build configuration list for PBXNativeTarget "FilimoTechnicalAssessmentTests" */;
+			buildPhases = (
+				611117762961E15500E9F5BC /* Sources */,
+				611117772961E15500E9F5BC /* Frameworks */,
+				611117782961E15500E9F5BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6111177F2961E15500E9F5BC /* PBXTargetDependency */,
+			);
+			name = FilimoTechnicalAssessmentTests;
+			productName = FilimoTechnicalAssessmentTests;
+			productReference = 6111177A2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		61762457295CB8D9004C3197 /* FilimoTechnicalAssessment */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6176246C295CB8DA004C3197 /* Build configuration list for PBXNativeTarget "FilimoTechnicalAssessment" */;
@@ -260,6 +308,10 @@
 				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					611117792961E15500E9F5BC = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 61762457295CB8D9004C3197;
+					};
 					61762457295CB8D9004C3197 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -287,11 +339,19 @@
 			projectRoot = "";
 			targets = (
 				61762457295CB8D9004C3197 /* FilimoTechnicalAssessment */,
+				611117792961E15500E9F5BC /* FilimoTechnicalAssessmentTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		611117782961E15500E9F5BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61762456295CB8D9004C3197 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,6 +366,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		611117762961E15500E9F5BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6111177D2961E15500E9F5BC /* FilimoTechnicalAssessmentTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61762454295CB8D9004C3197 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,6 +410,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6111177F2961E15500E9F5BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 61762457295CB8D9004C3197 /* FilimoTechnicalAssessment */;
+			targetProxy = 6111177E2961E15500E9F5BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		611117182960948B00E9F5BC /* Localizable.stringsdict */ = {
 			isa = PBXVariantGroup;
@@ -370,6 +446,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		611117802961E15500E9F5BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G7W2JU7KHV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobinjt.FilimoTechnicalAssessmentTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilimoTechnicalAssessment.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FilimoTechnicalAssessment";
+			};
+			name = Debug;
+		};
+		611117812961E15500E9F5BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G7W2JU7KHV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobinjt.FilimoTechnicalAssessmentTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilimoTechnicalAssessment.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FilimoTechnicalAssessment";
+			};
+			name = Release;
+		};
 		6176246A295CB8DA004C3197 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -545,6 +665,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		611117822961E15500E9F5BC /* Build configuration list for PBXNativeTarget "FilimoTechnicalAssessmentTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				611117802961E15500E9F5BC /* Debug */,
+				611117812961E15500E9F5BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		61762453295CB8D9004C3197 /* Build configuration list for PBXProject "FilimoTechnicalAssessment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

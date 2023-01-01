@@ -32,7 +32,10 @@ class SearchMoviesPresenter {
     
     init(apiClient: APIClient) {
         self.apiClient = apiClient
-        
+        subscribeToSearchedAddress()
+    }
+    
+    private func subscribeToSearchedAddress() {
         $searchedAddress
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .removeDuplicates()
