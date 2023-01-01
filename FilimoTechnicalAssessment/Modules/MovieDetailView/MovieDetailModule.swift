@@ -8,7 +8,7 @@
 import UIKit
 
 struct MovieDetailModule {
-    func build(selectedMovie: MovieItemModel) -> UIViewController {
+    func build(selectedMovie: MovieItemModelInterface) -> UIViewController {
         let presenter = MovieDetailPresenter(selectedMovie: selectedMovie)
         let view = MovieDetailView(presenter: presenter)
         presenter.view = view

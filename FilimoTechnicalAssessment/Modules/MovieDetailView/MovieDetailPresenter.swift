@@ -13,9 +13,9 @@ protocol MovieDetailPresenterInterface {
 
 class MovieDetailPresenter {
     weak var view: MovieDetailViewInterface?
-    private var selectedMovie: MovieItemModel
+    private var selectedMovie: MovieItemModelInterface
     
-    init(selectedMovie: MovieItemModel) {
+    init(selectedMovie: MovieItemModelInterface) {
         self.selectedMovie = selectedMovie
     }
 

@@ -12,5 +12,5 @@ protocol MovieItemModelInterface {
     var summary: String? { get }
     var thumbnailURL: URL? { get }
     var imageURL: URL? { get }
-//    var releaseDate: Date? { get }
+    var releaseDate: String? { get }
 }
