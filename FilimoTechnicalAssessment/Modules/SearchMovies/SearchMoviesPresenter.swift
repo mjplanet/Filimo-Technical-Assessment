@@ -40,7 +40,7 @@ class SearchMoviesPresenter {
     // MARK: - Subscribe to get searched address changes
     private func subscribeToSearchedAddress() {
         $searchedAddress
-            .debounce(for: 0.4, scheduler: RunLoop.main)
+            .debounce(for: 0.75, scheduler: RunLoop.main)
             .removeDuplicates()
             .sink { searchedText in
                 self.searchMovie(from: searchedText)
@@ -113,6 +113,8 @@ class SearchMoviesPresenter {
 extension SearchMoviesPresenter: SearchMoviesPresenterInterface {
     func searchBarTextDidChange(to text: String) {
         searchedAddress = text
+        resetPageResultData()
+        movies = []
         
         // Clear the movies array, currentPage, and total results if the user clicks on the x button on the search bar.
         // Without this line, If the users clear the text and immediately start typing there will be a bug

@@ -37,10 +37,15 @@ class MovieDetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        self.title = .navTitles(.movieDetail)
+        setTexts()
         applyTheme()
         addSubviews()
         setupConstraints()
+    }
+    
+    // MARK: - Set values
+    private func setTexts() {
+        self.title = .navTitles(.movieDetail)
     }
     
     // MARK: - Setups
@@ -76,11 +81,11 @@ class MovieDetailView: UIViewController {
     private func applyTheme() {
         view.backgroundColor = .systemBackground
         
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         titleLabel.numberOfLines = 2
         titleLabel.adjustsFontForContentSizeCategory = true
 
-        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionLabel.adjustsFontForContentSizeCategory = true
         descriptionLabel.numberOfLines = 0
         

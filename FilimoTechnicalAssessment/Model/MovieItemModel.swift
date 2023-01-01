@@ -23,23 +23,7 @@ struct MovieItemModel: Codable, Hashable, MovieItemModelInterface {
     let video: Bool
     let averageVote: Double?
     let voteCount: Int?
-    
-    var summary: String? {
-        return overview
-    }
-    
-    var thumbnailURL: URL? {
-        guard let posterPath else { return nil }
-        let baseUrlPath = "https://image.tmdb.org/t/p/w200"
-        return URL(string: baseUrlPath + posterPath)
-    }
-    
-    var imageURL: URL? {
-        guard let posterPath else { return nil }
-        let baseUrlPath = "https://image.tmdb.org/t/p/original"
-        return URL(string: baseUrlPath + posterPath)
-    }
-    
+        
     enum CodingKeys: String, CodingKey {
         case id
         case adult
@@ -55,5 +39,22 @@ struct MovieItemModel: Codable, Hashable, MovieItemModelInterface {
         case video
         case averageVote = "vote_average"
         case voteCount = "vote_count"
+    }
+    
+    // MARK: - Computed values
+    var summary: String? {
+        return overview
+    }
+    
+    var thumbnailURL: URL? {
+        guard let posterPath else { return nil }
+        let baseUrlPath = "https://image.tmdb.org/t/p/w200"
+        return URL(string: baseUrlPath + posterPath)
+    }
+    
+    var imageURL: URL? {
+        guard let posterPath else { return nil }
+        let baseUrlPath = "https://image.tmdb.org/t/p/original"
+        return URL(string: baseUrlPath + posterPath)
     }
 }

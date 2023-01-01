@@ -8,7 +8,6 @@
 import UIKit
 
 class SupplementaryLoadingView: UICollectionReusableView {
-    static let reuseIdentifier = "shadow-supplementary-reuse-identifier"
     
     private lazy var loadingIndicator : UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -20,11 +19,12 @@ class SupplementaryLoadingView: UICollectionReusableView {
         super.init(frame: frame)
         configure()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("code init not configured")
     }
     
-    func shouldHide(_ isHidden: Bool) {
+    func hideLoading(_ isHidden: Bool) {
         loadingIndicator.isHidden = isHidden
     }
     

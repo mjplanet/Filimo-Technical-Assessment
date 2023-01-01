@@ -207,8 +207,8 @@
 			children = (
 				61FF56C0295CDAD300EE7E42 /* Cells */,
 				617FB889295CBA7B00CCF71F /* SearchMoviesModule.swift */,
-				617FB88A295CBA7B00CCF71F /* SearchMoviesPresenter.swift */,
 				617FB88B295CBA7B00CCF71F /* SearchMoviesView.swift */,
+				617FB88A295CBA7B00CCF71F /* SearchMoviesPresenter.swift */,
 			);
 			path = SearchMovies;
 			sourceTree = "<group>";

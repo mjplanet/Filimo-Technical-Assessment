@@ -45,7 +45,6 @@ class SearchMoviesView: UIViewController, ToastInterface {
     private lazy var emptyStateImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "Movie")
         return imageView
     }()
     
@@ -62,21 +61,15 @@ class SearchMoviesView: UIViewController, ToastInterface {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHierarchy()
+        configureCollectionView()
+        setupNavigationItems()
         configureDataSource()
         setupSearchBar()
         setupEmptyStateView()
     }
     
     // MARK: - Setups
-    private func configureHierarchy() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemGroupedBackground
-        collectionView.delegate = self
-        collectionView.register(MovieCell.nib, forCellWithReuseIdentifier: MovieCell.identifier)
-        view.addSubview(collectionView)
-        
+    private func setupNavigationItems() {
         navigationItem.titleView = movieSearchBar
     }
     
@@ -85,6 +78,28 @@ class SearchMoviesView: UIViewController, ToastInterface {
         movieSearchBar.placeholder = "Search movie"
     }
     
+    private func setupEmptyStateView() {
+        emptyStateImageView.image = UIImage(named: "Movie")
+        self.view.addSubview(emptyStateImageView)
+        NSLayoutConstraint.activate([
+            emptyStateImageView.widthAnchor.constraint(equalToConstant: 200),
+            emptyStateImageView.heightAnchor.constraint(equalToConstant: 200),
+            emptyStateImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyStateImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+    
+    // MARK: - Setup collection view
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.keyboardDismissMode = .interactive
+        collectionView.delegate = self
+        collectionView.register(MovieCell.nib, forCellWithReuseIdentifier: MovieCell.identifier)
+        view.addSubview(collectionView)
+    }
+
     private func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { [weak self] (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             guard let self = self else { return nil }
@@ -110,12 +125,11 @@ class SearchMoviesView: UIViewController, ToastInterface {
         section.interGroupSpacing = 8
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
         
-        // Header
-        var footerSize: NSCollectionLayoutSize?
-        footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        // Footer
+        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
                 
         let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: footerSize!,
+            layoutSize: footerSize,
             elementKind: "section-footer-element-kind",
             alignment: .bottom)
         
@@ -139,11 +153,12 @@ class SearchMoviesView: UIViewController, ToastInterface {
         dataSource?.supplementaryViewProvider = { _, kind, indexPath in
             let footer = self.collectionView.dequeueConfiguredReusableSupplementary(using: footerRegistration, for: indexPath)
             
+            // Subscribe to isLoading and get value in sink closure to show, hide loading
             self.$isLoading.sink { isLoading in
                 if isLoading == true {
-                    footer.shouldHide(false)
+                    footer.hideLoading(false)
                 } else {
-                    footer.shouldHide(true)
+                    footer.hideLoading(true)
                 }
             }.store(in: &self.cancellable)
 
@@ -151,17 +166,6 @@ class SearchMoviesView: UIViewController, ToastInterface {
         }
 
     }
-    
-    private func setupEmptyStateView() {
-        self.view.addSubview(emptyStateImageView)
-        NSLayoutConstraint.activate([
-            emptyStateImageView.widthAnchor.constraint(equalToConstant: 200),
-            emptyStateImageView.heightAnchor.constraint(equalToConstant: 200),
-            emptyStateImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyStateImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-    }
-    
 }
 
 extension SearchMoviesView: SearchMoviesViewInterface {
@@ -218,9 +222,5 @@ extension SearchMoviesView: UICollectionViewDelegate {
 extension SearchMoviesView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         presenter.searchBarTextDidChange(to: searchText)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("CIR")
     }
 }
