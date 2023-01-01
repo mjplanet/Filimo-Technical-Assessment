@@ -37,11 +37,6 @@ class SearchMoviesPresenter {
         subscribeToSearchedAddress()
     }
     
-    private func resetPageResultData() {
-        currentPage = 0
-        apiTotalResults = 0
-    }
-    
     // MARK: - Subscribe to get searched address changes
     private func subscribeToSearchedAddress() {
         $searchedAddress
@@ -63,26 +58,55 @@ class SearchMoviesPresenter {
         view?.movieIsFetching()
         
         let urlRequest = ServerRequest.SearchMovie.searchMovies(apiKey: AppConstants.apiKey, searchQuery: searchedText, page: currentPage + 1).urlRequest
+        
         apiClient.executeRequest(urlRequest) { [weak self] result in
+            guard let self else { return }
+            
             switch result {
             case .success(let success):
-                let decodedModel = try? JSONDecoder().decode(PaginationModel<MovieItemModel>.self, from: success.data)
-                self?.movies += decodedModel?.results ?? []
-                self?.apiTotalResults = decodedModel?.totalResults ?? 0
-                self?.currentPage = (decodedModel?.page ?? 0)
-                
-                if decodedModel?.totalResults == 0 {
-                    self?.movies = []
-                    self?.view?.showEmptyState()
-                } else {
-                    self?.view?.hideEmptyState()
+                do {
+                    try self.decodeApiResult(success.data)
+                } catch {
+                    self.failedResult(.couldNotDecodeErrorModel)
                 }
-                
             case .failure(let failure):
-                self?.resetPageResultData()
-                self?.view?.couldNotFetchMedia(withError: failure)
+                self.failedResult(failure)
             }
         }
+    }
+    
+    private func failedResult(_ error: NetworkingError) {
+        resetPageResultData()
+        view?.couldNotFetchMedia(withError: error)
+    }
+    
+    private func decodeApiResult(_ data: Data) throws {
+        do {
+            let decodedModel = try JSONDecoder().decode(PaginationModel<MovieItemModel>.self, from: data)
+            successfulDecodedResult(decodedModel: decodedModel)
+        } catch {
+            throw error
+        }
+    }
+    
+    private func successfulDecodedResult(decodedModel: PaginationModel<MovieItemModel>) {
+        if decodedModel.totalResults == 0 {
+            movies = []
+            view?.showEmptyState()
+            view?.resultNotFound()
+        } else {
+            view?.hideEmptyState()
+        }
+        
+        movies.append(contentsOf: decodedModel.results)
+        apiTotalResults = decodedModel.totalResults ?? 0
+        currentPage = (decodedModel.page ?? 0)
+    }
+    
+    
+    private func resetPageResultData() {
+        currentPage = 0
+        apiTotalResults = 0
     }
 }
 
