@@ -72,8 +72,12 @@ class SearchMoviesPresenter {
                 self?.currentPage = (decodedModel?.page ?? 0)
                 
                 if decodedModel?.totalResults == 0 {
-                    self?.view?.resultNotFound()
+                    self?.movies = []
+                    self?.view?.showEmptyState()
+                } else {
+                    self?.view?.hideEmptyState()
                 }
+                
             case .failure(let failure):
                 self?.resetPageResultData()
                 self?.view?.couldNotFetchMedia(withError: failure)
@@ -91,6 +95,7 @@ extension SearchMoviesPresenter: SearchMoviesPresenterInterface {
         if text.isEmpty {
             movies = []
             resetPageResultData()
+            view?.showEmptyState()
         }
     }
     

@@ -14,6 +14,8 @@ protocol SearchMoviesViewInterface: AnyObject {
     func resultNotFound()
     func couldNotFetchMedia(withError error: Error)
     func present(_ vc: UIViewController)
+    func showEmptyState()
+    func hideEmptyState()
 }
 
 class SearchMoviesView: UIViewController, ToastInterface {
@@ -39,11 +41,12 @@ class SearchMoviesView: UIViewController, ToastInterface {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-    
-    private var loadingIndicator : UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        view.style = .large
-        return view
+
+    private lazy var emptyStateImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "Movie")
+        return imageView
     }()
     
     // MARK: - Inits
@@ -62,6 +65,7 @@ class SearchMoviesView: UIViewController, ToastInterface {
         configureHierarchy()
         configureDataSource()
         setupSearchBar()
+        setupEmptyStateView()
     }
     
     // MARK: - Setups
@@ -147,7 +151,16 @@ class SearchMoviesView: UIViewController, ToastInterface {
         }
 
     }
-    // MARK: - Actions
+    
+    private func setupEmptyStateView() {
+        self.view.addSubview(emptyStateImageView)
+        NSLayoutConstraint.activate([
+            emptyStateImageView.widthAnchor.constraint(equalToConstant: 200),
+            emptyStateImageView.heightAnchor.constraint(equalToConstant: 200),
+            emptyStateImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyStateImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
     
 }
 
@@ -179,6 +192,14 @@ extension SearchMoviesView: SearchMoviesViewInterface {
     
     func present(_ vc: UIViewController) {
         self.present(vc, animated: true)
+    }
+    
+    func showEmptyState() {
+        emptyStateImageView.isHidden = false
+    }
+    
+    func hideEmptyState() {
+        emptyStateImageView.isHidden = true
     }
 }
 
