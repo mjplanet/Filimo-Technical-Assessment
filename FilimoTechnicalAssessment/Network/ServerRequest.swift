@@ -13,7 +13,7 @@ enum ServerRequest {
             let url: URLPath = .baseURL / .search / .movie
             let parameters = ["api_key": apiKey,
                               "query": searchQuery,
-                              "page": page,
+                              "page": "\(page)",
                               "language": Locale.current.language.languageCode?.identifier ?? "en"] as [String : Any]
             
             return .init(url: url, method: .get, parameters: parameters)

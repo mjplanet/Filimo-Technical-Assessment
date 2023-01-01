@@ -9,10 +9,11 @@ import UIKit
 
 protocol SearchMoviesViewInterface: AnyObject {
     func movieFetched()
+    func couldNotFetchMedia(withError error: Error)
     func present(_ vc: UIViewController)
 }
 
-class SearchMoviesView: UIViewController {
+class SearchMoviesView: UIViewController, ToastInterface {
     
     // MARK: - Properties
     var presenter: SearchMoviesPresenterInterface
@@ -47,7 +48,6 @@ class SearchMoviesView: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad()
         configureHierarchy()
         configureDataSource()
         setupSearchBar()
@@ -114,9 +114,15 @@ extension SearchMoviesView: SearchMoviesViewInterface {
     func movieFetched() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, MovieItemModel>()
         snapshot.appendSections([.main])
-        let movies = presenter.movies
+        let movies = presenter.getMovies()
         snapshot.appendItems(movies)
         dataSource?.apply(snapshot)
+    }
+    
+    func couldNotFetchMedia(withError error: Error) {
+        if error is NetworkingError {
+            showToast(text: error.localizedDescription)
+        }
     }
     
     func present(_ vc: UIViewController) {
@@ -128,10 +134,16 @@ extension SearchMoviesView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter.didSelectItemAt(indexPath)
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.bounds.height + scrollView.contentOffset.y >= scrollView.contentSize.height {
+            presenter.didReachEndOfList()
+        }
+    }
 }
 
 extension SearchMoviesView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchMovie(from: searchText)
+        presenter.searchBarTextDidChange(to: searchText)
     }
 }

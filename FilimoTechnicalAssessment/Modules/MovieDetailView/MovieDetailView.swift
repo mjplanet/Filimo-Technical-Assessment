@@ -69,7 +69,7 @@ class MovieDetailView: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 250)
+            imageView.heightAnchor.constraint(equalToConstant: 500)
         ])
     }
 
@@ -77,6 +77,7 @@ class MovieDetailView: UIViewController {
         view.backgroundColor = .systemBackground
         
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title2)
+        titleLabel.numberOfLines = 2
         titleLabel.adjustsFontForContentSizeCategory = true
 
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption1)

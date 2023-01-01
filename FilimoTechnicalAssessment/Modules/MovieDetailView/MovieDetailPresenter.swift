@@ -11,7 +11,7 @@ protocol MovieDetailPresenterInterface {
     func viewDidLoad()
 }
 
-class MovieDetailPresenter: NSObject {
+class MovieDetailPresenter {
     weak var view: MovieDetailViewInterface?
     private var selectedMovie: MovieItemModel
     
