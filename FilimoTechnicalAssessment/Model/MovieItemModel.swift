@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct MovieItemModel: Codable, Hashable, MovieItemModelInterface {    
+struct MovieItemModel: Codable, Hashable, MovieItemModelInterface {
+    var identifier = UUID()
     let id: Int
     let adult: Bool
     let backdropPath: String?
